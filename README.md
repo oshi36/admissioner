@@ -23,18 +23,20 @@ Clone this repo & build image using Dockerfile in the `app` directory.
 
 Note that you need to generate TLS certs and put `server.crt` & `server.key` in the app directory before build.
 
-### Register validating controller
+### Register validating|mutating controller
 
-First insert the CA into `caBundle` field of `validate.yml` and then apply it:
+First insert the CA into `caBundle` field of `validate|mutate.yml` and then apply it:
 ```
-$ kubectl apply -f validate.yaml
+$ kubectl apply -f validate|mutate.yaml
 ```
 
 ### To-Do
 
-* Add `bound` label validation & smart scheduling mutation web-hooks.
+* Add custom schedulers
 
 ## Version History
 
+* 0.2
+    * Add mutation webhook & configuration manifest
 * 0.1
     * Initial Release
