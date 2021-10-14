@@ -1,0 +1,24 @@
+apiVersion: admissionregistration.k8s.io/v1beta1
+kind: MutatingWebhookConfiguration
+metadata:
+  name: mutating-webhook
+  namespace: admissioner
+  labels:
+    component: mutating-controller
+webhooks:
+  - name: admissioner.example.com
+    failurePolicy: Fail
+    clientConfig:
+      service:
+        name: admissioner
+        namespace: admissioner
+        path: /mutate/deployments
+      caBundle: <redacted> # Insert your CA
+    rules:
+      - apiGroups: ["apps"]
+        resources:
+          - "deployments"
+        apiVersions:
+          - "*"
+        operations:
+          - CREATE
