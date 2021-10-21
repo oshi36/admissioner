@@ -3,8 +3,7 @@ from flask import Flask, request, jsonify
 admission_controller = Flask(__name__)
 
 @admission_controller.route('/validate/deployments', methods=['POST'])
-
-def deployment_webhook():
+def validate_webhook():
     req_info = request.get_json()["request"]["object"]["metadata"]
 
     if req_info["labels"].get("env"):
@@ -13,7 +12,7 @@ def deployment_webhook():
     return admission_response(False, "Label `env` is not defined for application %s" % req_info["name"])
 
 @admission_controller.route('/mutate/deployments', methods=['POST'])
-def deployment_webhook_mutate():
+def mutate_webhook():
     req_info = request.get_json()["request"]["object"]["metadata"]
 
     if req_info["labels"].get("bound"):
