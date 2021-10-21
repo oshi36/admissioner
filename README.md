@@ -23,6 +23,31 @@ Clone this repo & build image using Dockerfile in the `app` directory.
 
 Note that you need to generate TLS certs and put `server.crt` & `server.key` in the app directory before build.
 
+If you want to do it in local|staging environment create a self-signed cert using:
+```
+$ openssl req -new -key server.key -out server.csr -subj "/C=IR/ST=example/L=example/O=OrgName/OU=IT Department/CN=example.com" && \
+    openssl x509 -req -days 365 -in server.csr -signkey server.key -out server.crt
+```
+
+Then use:
+```
+$ docker run \
+  -v ./server.crt:/app/server.crt:ro \
+  -v ./server.key:/app/server.key:ro \
+  admissioner:tag
+```
+
+Also for testing in KinD(or production) you can place the cert & key in `certs.yml`, then 
+create it using:
+```
+$ kubectl apply -f certs.yml
+```
+
+Now deploy the app with:
+```
+$ kubectl apply -f admissioner.yml
+```
+
 ### Register validating|mutating controller
 
 First insert the CA into `caBundle` field of `validate|mutate.yml` and then apply it:

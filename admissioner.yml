@@ -1,0 +1,32 @@
+apiVersion:  apps/v1
+kind: Deployment 
+metadata:
+  labels:
+    app: admissioner
+  name: admissioner
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: admissioner
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: admissioner
+    spec:
+      containers:
+      - image: admissioner
+        name: admissioner
+        volumeMounts:
+          - mountPath: "/app/certs"
+            name: admissioner-certs
+            readOnly: true
+        ports:
+        - containerPort: 443
+      volumes:
+        - name: admissioner-certs
+          secret:
+            secretName: admissioner-secret
+      restartPolicy: Always

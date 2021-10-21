@@ -35,4 +35,4 @@ def admission_response(allowed, message):
     return jsonify({"response": {"allowed": allowed, "status": {"message": message}}})
 
 if __name__ == '__main__':
-    admission_controller.run(host='0.0.0.0', port=443, ssl_context=("/server.crt", "/server.key"))
+    admission_controller.run(host='0.0.0.0', port=443, ssl_context=("./certs/server.crt", "./certs/server.key"))

@@ -1,0 +1,8 @@
+apiVersion: v1
+data:
+ server.key: <place-key-here>
+ server.crt: <place-cert-here>
+kind: Secret
+metadata:
+ name: admissioner-secret
+type: Opaque
