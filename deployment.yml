@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: admissioner
+  name: admissioner
+  labels:
+    app: admissioner
+    production: "true"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: admissioner
+      production: "true"
+  template:
+    metadata:
+      labels:
+        app: admissioner
+        production: "true"
+    spec:
+      containers:
+      - name: admissioner
+        image: admissioner
+        ports:
+        - containerPort: 443
+        volumeMounts:
+        - name: admissioner-secret
+          mountPath: /app/certs
+          readOnly: true
+      volumes:
+        - name: admissioner-secret
+          secret:
+            secretName: admissioner-secret
