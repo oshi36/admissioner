@@ -8,7 +8,10 @@ def deployment_webhook():
     req_info = request.get_json()["request"]["object"]["metadata"]
 
     if req_info["labels"].get("production"):
-        return admission_response(True, "Deployment %s has `production` label." % req_info["name"])
+        if req_info["labels"]["production"] == "true" or req_info["labels"]["production"] == "false":
+            return admission_response(True, "Deployment %s has `production` label." % req_info["name"])
+        else:
+            return admission_response(False, "Invalid value for `production` label in Deployment %s" % req_info["name"])
     
     return admission_response(False, "Deployment %s doesn't have `production` label." % req_info["name"])
 
