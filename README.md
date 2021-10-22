@@ -1,12 +1,11 @@
 # Admissioner
 
-This is a Kubernetes validation controller that checks if `env` label exist in all incoming deployment creation requests.
+This is a Kubernetes validating controller that checks if `production` label exists in all incoming deployment creation requests.
 
-If you have a common cluster for both `production` & `staging` apps you can label them with `env` to know which scalable objects you can down-scale to 0.
+If you have a common cluster for both `production` & `staging` apps you can label them with `production` to know which scalable objects you can scale to 0.
 
 Further steps are:
 
-* Adding `bound` label check to smart schedule deployments on clusters deployed with inhomogeneous infrastructure nodes.
 * Connect this to the `Auto Idler` project.
 
 ## Getting Started
