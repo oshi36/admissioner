@@ -4,10 +4,6 @@ This is a Kubernetes validating controller that checks if `production` label exi
 
 If you have a common cluster for both `production` & `staging` apps you can label them with `production` to know which scalable objects you can scale to 0.
 
-Further steps are:
-
-* Connect this to the `Auto Idler` project.
-
 ## Getting Started
 
 First create `admission` namespace with:
@@ -31,7 +27,9 @@ $ kubectl apply -f validate.yaml
 
 ### To-Do
 
-* Add `bound` label validation & smart scheduling mutation web-hooks.
+Further steps are:
+
+* Connect this to the `Auto Idler` project.
 
 ## Version History
 
