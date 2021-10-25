@@ -1,3 +1,4 @@
+"""Validating webhook for the Kubernetes admission controller."""
 from flask import Flask, request, jsonify
 
 admission_controller = Flask(__name__)
